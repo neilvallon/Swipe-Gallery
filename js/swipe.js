@@ -16,6 +16,7 @@ flickrParser = function(json){
 	return imageList;
 }
 
+
 /**
  * Distributes the number of pixles in a gallery between the images of that gallery.
  * For use as the width of the rollover div that activates each image.
@@ -28,14 +29,25 @@ distributeimages = function(imgNum, pxWidth){
 	builder = function(remainder, acumFun){
 		if(remainder == 0)
 			return acumFun;
+		
+		// Get the interval of images to skip before adding another pixle.
+		// Ceil prevents adding too many.
 		var a = Math.ceil(imgNum / remainder)
+		
+		// Create a new anonymouse function that returns the sum pixles asigned at other intervals with
+		// 1 added if the index 'x' is within the current interval as well.
 		var newFun = function(x){ return acumFun(x) + (x % a == 0) }
+		
+		// Update remainder by removing pixles taken care of by this iteration
+		// while recusivly adding more layers untill remainder is 0.
 		return builder(remainder - Math.floor(imgNum / a), newFun);
 	}
 	
+	// Initalize base function as the number of pixles every image should recieve.
 	base = function(x){ return Math.floor(pxWidth / imgNum) };
 	return builder(pxWidth % imgNum, base)
 }
+
 
 /**
  * Updates image and title/author info
@@ -50,6 +62,7 @@ changeImage = function(domObj, infoBar, img){
 	infoBar.html("<h3>"+img.title+"</h3><h4>"+img.artist+"</h4>");
 }
 
+
 /**
  * Adds the required HTML to the user provided div.
  * This incudes setting up rollover zones and event listeners.
@@ -59,7 +72,8 @@ changeImage = function(domObj, infoBar, img){
  * @return void
  */
 renderGallery = function(domObj, imgList){
-	var distribution = distributeimages(imgList.length, domObj.width());	
+	// Get function to map image indexes to pixle values
+	var distribution = distributeimages(imgList.length, domObj.width());
 	
 	var hoverContainer = $("<div class='rContainer'></div>");
 	var infoContainer = $("<div class='info'></div>");
@@ -69,13 +83,16 @@ renderGallery = function(domObj, imgList){
 	domObj.append(infoContainer);
 	
 	$(imgList).each(function(i, img){
+		// add rollover element for image with a width set to that calculated in distributeimages()
 		var hoverTemp = "<div class='rollover' style='width:"+distribution(i+1)+"px;'><\/div>"
 		var elm = $(hoverTemp);
-		
 		hoverContainer.append(elm);
+		
+		// Set up event listeners
 		elm.click(function(){ window.open(img.url, '_blank'); });
 		elm.mouseover(function(){ changeImage(domObj, infoContainer, img); });
-		changeImage(domObj, infoContainer, img);
+		
+		changeImage(domObj, infoContainer, img); // This is lazy but it ends up loading the last image
 	});
 }
 
