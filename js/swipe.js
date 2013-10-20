@@ -25,14 +25,15 @@ distributeimages = function(imgNum, pxWidth){
 
 renderGallery = function(domObj, imgList){
 	var distribution = distributeimages(imgList.length, domObj.width());
-	console.log(distribution)
-	c=0;
-	for(i=1;i<=imgList.length;i++)
-		c += distribution(i);
-		console.log(c)
-}
 
-distributeimages(201, 454)
+	$(imgList).each(function(i, img){
+		var hoverTemp = "<div class='rollover' style='width:"+distribution(i+1)+"px;'><\/div>"
+		var elm = $(hoverTemp);
+		
+		domObj.append(elm);
+		elm.click(function(){ window.open(img.url, '_blank'); });
+	});
+}
 
 $(document).ready(function(){
 	$('.swipeGal').each(function(i, obj){
