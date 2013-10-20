@@ -24,7 +24,7 @@ distributeimages = function(imgNum, pxWidth){
 }
 
 changeImage = function(domObj, infoBar, img){
-	domObj.css('background-image', "URL('"+img.image+"')");
+	domObj.css('background-image', "URL('"+img.image.replace('_m', '')+"')");
 	infoBar.html("<h3>"+img.title+"</h3><h4>"+img.artist+"</h4>");
 }
 
@@ -33,7 +33,7 @@ renderGallery = function(domObj, imgList){
 	
 	var hoverContainer = $("<div class='rContainer'></div>");
 	var infoContainer = $("<div class='info'></div>");
-	infoContainer.css('top', -(domObj.height()-10))
+	infoContainer.css('top', -(domObj.height()-15))
 	
 	domObj.append(hoverContainer);
 	domObj.append(infoContainer);
