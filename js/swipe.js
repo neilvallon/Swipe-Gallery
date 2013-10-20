@@ -45,6 +45,7 @@ renderGallery = function(domObj, imgList){
 		hoverContainer.append(elm);
 		elm.click(function(){ window.open(img.url, '_blank'); });
 		elm.mouseover(function(){ changeImage(domObj, infoContainer, img); });
+		changeImage(domObj, infoContainer, img);
 	});
 }
 
