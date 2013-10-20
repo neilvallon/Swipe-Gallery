@@ -1,0 +1,10 @@
+.swipeGal{
+	width:247px;
+	height:200px;
+	border:1px solid black;
+}
+.rollover{
+	float:left;
+	height:100%;
+	opacity:0;
+}
