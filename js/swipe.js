@@ -23,6 +23,10 @@ distributeimages = function(imgNum, pxWidth){
 	return builder(pxWidth % imgNum, base)
 }
 
+changeImage = function(domObj, img){
+	domObj.css('background-image', "URL('"+img.image+"')");
+}
+
 renderGallery = function(domObj, imgList){
 	var distribution = distributeimages(imgList.length, domObj.width());
 
@@ -32,6 +36,7 @@ renderGallery = function(domObj, imgList){
 		
 		domObj.append(elm);
 		elm.click(function(){ window.open(img.url, '_blank'); });
+		elm.mouseover(function(){ changeImage(domObj, img); });
 	});
 }
 
