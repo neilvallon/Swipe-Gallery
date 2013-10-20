@@ -1,3 +1,9 @@
+/**
+ * Reformates returning json object into a format we define.
+ *
+ * @param JSON json 
+ * @return JSON
+ */
 flickrParser = function(json){
 	var imageList = []
 	$(json.items).each(function(i, image){
@@ -10,6 +16,14 @@ flickrParser = function(json){
 	return imageList;
 }
 
+/**
+ * Distributes the number of pixles in a gallery between the images of that gallery.
+ * For use as the width of the rollover div that activates each image.
+ *
+ * @param int imgNum    Number of images in current gallery
+ * @param int pxWidth   Width of Current gallery
+ * @return funtion(x)   Function takes an index 'x' and returns number of pixles assigned to that index
+ */
 distributeimages = function(imgNum, pxWidth){
 	builder = function(remainder, acumFun){
 		if(remainder == 0)
@@ -23,11 +37,27 @@ distributeimages = function(imgNum, pxWidth){
 	return builder(pxWidth % imgNum, base)
 }
 
+/**
+ * Updates image and title/author info
+ *
+ * @param DOM domObj    jQuery DOM object of the gallery
+ * @param DOM infoBar   jQuery DOM object of the gallerys info bar div
+ * @param JSON img      JSON containing information about the image to update with
+ * @return void
+ */
 changeImage = function(domObj, infoBar, img){
 	domObj.css('background-image', "URL('"+img.image.replace('_m', '')+"')");
 	infoBar.html("<h3>"+img.title+"</h3><h4>"+img.artist+"</h4>");
 }
 
+/**
+ * Adds the required HTML to the user provided div.
+ * This incudes setting up rollover zones and event listeners.
+ *
+ * @param DOM domObj       jQuery DOM object of the gallery
+ * @param JSON[] imgList   Array of image information
+ * @return void
+ */
 renderGallery = function(domObj, imgList){
 	var distribution = distributeimages(imgList.length, domObj.width());	
 	
@@ -49,6 +79,10 @@ renderGallery = function(domObj, imgList){
 	});
 }
 
+
+/**
+ * Recieves remote image information and initalizes each gallery after the page loads
+ */
 $(document).ready(function(){
 	$('.swipeGal').each(function(i, obj){
 		var feedid = $(obj).data('feed-id');		
