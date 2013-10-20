@@ -23,8 +23,9 @@ distributeimages = function(imgNum, pxWidth){
 	return builder(pxWidth % imgNum, base)
 }
 
-changeImage = function(domObj, img){
+changeImage = function(domObj, infoBar, img){
 	domObj.css('background-image', "URL('"+img.image+"')");
+	infoBar.html("<h3>"+img.title+"</h3><h4>"+img.artist+"</h4>");
 }
 
 renderGallery = function(domObj, imgList){
@@ -32,7 +33,7 @@ renderGallery = function(domObj, imgList){
 	
 	var hoverContainer = $("<div class='rContainer'></div>");
 	var infoContainer = $("<div class='info'></div>");
-	infoContainer.css('top', -domObj.height())
+	infoContainer.css('top', -(domObj.height()-10))
 	
 	domObj.append(hoverContainer);
 	domObj.append(infoContainer);
@@ -43,7 +44,7 @@ renderGallery = function(domObj, imgList){
 		
 		hoverContainer.append(elm);
 		elm.click(function(){ window.open(img.url, '_blank'); });
-		elm.mouseover(function(){ changeImage(domObj, img); });
+		elm.mouseover(function(){ changeImage(domObj, infoContainer, img); });
 	});
 }
 
