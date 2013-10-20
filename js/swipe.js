@@ -28,13 +28,20 @@ changeImage = function(domObj, img){
 }
 
 renderGallery = function(domObj, imgList){
-	var distribution = distributeimages(imgList.length, domObj.width());
-
+	var distribution = distributeimages(imgList.length, domObj.width());	
+	
+	var hoverContainer = $("<div class='rContainer'></div>");
+	var infoContainer = $("<div class='info'></div>");
+	infoContainer.css('top', -domObj.height())
+	
+	domObj.append(hoverContainer);
+	domObj.append(infoContainer);
+	
 	$(imgList).each(function(i, img){
 		var hoverTemp = "<div class='rollover' style='width:"+distribution(i+1)+"px;'><\/div>"
 		var elm = $(hoverTemp);
 		
-		domObj.append(elm);
+		hoverContainer.append(elm);
 		elm.click(function(){ window.open(img.url, '_blank'); });
 		elm.mouseover(function(){ changeImage(domObj, img); });
 	});
