@@ -82,6 +82,9 @@ renderGallery = function(domObj, imgList){
 	domObj.append(hoverContainer);
 	domObj.append(infoContainer);
 	
+	// Display first image
+	changeImage(domObj, infoContainer, imgList[0]);
+	
 	$(imgList).each(function(i, img){
 		// add rollover element for image with a width set to that calculated in distributeimages()
 		var hoverTemp = "<div class='rollover' style='width:"+distribution(i+1)+"px;'><\/div>"
@@ -91,8 +94,6 @@ renderGallery = function(domObj, imgList){
 		// Set up event listeners
 		elm.click(function(){ window.open(img.url, '_blank'); });
 		elm.mouseover(function(){ changeImage(domObj, infoContainer, img); });
-		
-		changeImage(domObj, infoContainer, img); // This is lazy but it ends up loading the last image
 	});
 }
 
