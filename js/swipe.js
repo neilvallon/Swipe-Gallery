@@ -80,8 +80,6 @@
 		 */
 		var renderGallery = function(domObj, imgList){
 			var distribution, hoverContainer, infoContainer;
-			// Get function to map image indexes to pixle values
-			distribution = distributeimages(imgList.length, domObj.width());
 			
 			hoverContainer = $("<div class='rContainer'></div>");
 			infoContainer = $("<div class='info'></div>").css('top', -domObj.height());
@@ -91,15 +89,24 @@
 			// Display first image
 			changeImage(domObj, infoContainer, imgList[0]);
 			
-			$(imgList).each(function(i, img){
-				// add rollover element for image with a width set to that calculated in distributeimages()
-				var elm = $("<span class='rollover'></span>")
-					.css('width', distribution(i+1))
-					.click(function(){ window.open(img.url, '_blank'); })
-					.mouseover(function(){ changeImage(domObj, infoContainer, img); });
+			$(window).resize(function(){
+				// Clear old rollover elements
+				hoverContainer.html('');
 				
-				hoverContainer.append(elm);
-			});
+				// Get function to map image indexes to pixle values
+				distribution = distributeimages(imgList.length, domObj.width());
+				
+				$(imgList).each(function(i, img){
+					// add rollover element for image with a width set to that calculated in distributeimages()
+					var elm = $("<span class='rollover'></span>")
+						.css('width', distribution(i+1))
+						.click(function(){ window.open(img.url, '_blank'); })
+						.mouseover(function(){ changeImage(domObj, infoContainer, img); });
+				
+					hoverContainer.append(elm);
+				});
+			}).trigger('resize');
+			
 		};
 		
 		
