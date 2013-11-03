@@ -2,16 +2,26 @@
 <head>
 	<title>Swipe Image Gallery</title>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js"></script>
 	<script src="js/swipe.js"></script>
+	
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.1/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/swipe.css">
 </head>
 
 <body>
-	<div class='swipeGal' data-feed-id='97292664@N00'></div>
-	<br />
-	<div class='swipeGal' data-feed-id='462690@N20'></div>
-	<br />
-	<div class='swipeGal' data-feed-id='25951944@N00'></div>
+	
+	<div class="row">
+		<div class="col-md-4">
+			<div class='swipeGal' data-feed-id='97292664@N00'></div>
+		</div>
+		<div class="col-md-4">
+			<div class='swipeGal' data-feed-id='462690@N20'></div>
+		</div>
+		<div class="col-md-4">
+			<div class='swipeGal' data-feed-id='25951944@N00'></div>
+		</div>
+	</div>
 	
 	<script>
 		$(document).ready( function() {
