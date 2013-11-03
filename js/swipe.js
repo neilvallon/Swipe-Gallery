@@ -66,7 +66,7 @@
 		 */
 		var changeImage = function(domObj, infoBar, img){
 			domObj.css('background-image', "URL('" + img.image.replace('_m', '') + "')");
-			infoBar.html("<h3>" + img.title + "</h3><h4>" + img.artist + "</h4>");
+			infoBar.html("<h3>" + img.title + "</h3><h5>" + img.artist + "</h5>");
 		};
 		
 		
@@ -84,7 +84,7 @@
 			distribution = distributeimages(imgList.length, domObj.width());
 			
 			hoverContainer = $("<div class='rContainer'></div>");
-			infoContainer = $("<div class='info'></div>").css('top', 15 - domObj.height());
+			infoContainer = $("<div class='info'></div>").css('top', -domObj.height());
 			
 			domObj.append([hoverContainer, infoContainer]);
 			
@@ -93,7 +93,7 @@
 			
 			$(imgList).each(function(i, img){
 				// add rollover element for image with a width set to that calculated in distributeimages()
-				var elm = $("<div class='rollover'></div>")
+				var elm = $("<span class='rollover'></span>")
 					.css('width', distribution(i+1))
 					.click(function(){ window.open(img.url, '_blank'); })
 					.mouseover(function(){ changeImage(domObj, infoContainer, img); });
