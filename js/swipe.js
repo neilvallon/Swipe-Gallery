@@ -1,3 +1,8 @@
+/*!
+ * Copyright (c) 2014 Neil Vallon (http://neil.vallon.me)
+ * Licensed under MIT (http://opensource.org/licenses/MIT)
+ */
+
 (function($){
 	$.fn.swipeGallery = function(){
 		/**
