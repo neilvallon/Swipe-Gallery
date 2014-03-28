@@ -1,0 +1,43 @@
+/*!
+ * Copyright (c) 2014 Neil Vallon (http://neil.vallon.me)
+ * Licensed under MIT (http://opensource.org/licenses/MIT)
+ */
+
+@image-height: 400px;
+
+/* Required */
+.swipeGal {
+	height: @image-height;
+
+	.rollover {
+		display:inline-block;
+		height:100%;
+		opacity:0;
+	}
+	.info {
+		position:relative;
+	}
+}
+
+
+/* Optional Styling */
+.swipeGal {
+	border-radius: 10px;
+	background-size: cover;
+	background-position: center;
+
+	.info {
+		margin:15px 0 0 50px;
+
+		h3, h5 {
+			background:black;
+			color:white;
+			padding:3px;
+			opacity:0.75;
+			margin:0;
+		}
+		h5 {
+			margin:5px 0 0 20px;
+		}
+	}
+}
