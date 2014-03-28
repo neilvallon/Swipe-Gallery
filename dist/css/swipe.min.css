@@ -1,0 +1,5 @@
+/*!
+ * Copyright (c) 2014 Neil Vallon (http://neil.vallon.me)
+ * Licensed under MIT (http://opensource.org/licenses/MIT)
+ */
+.swipeGal{height:400px}.swipeGal .rollover{display:inline-block;height:100%;opacity:0}.swipeGal .info{position:relative}.swipeGal{border-radius:10px;background-size:cover;background-position:center}.swipeGal .info{margin:15px 0 0 50px}.swipeGal .info h3,.swipeGal .info h5{background:#000;color:#fff;padding:3px;opacity:.75;margin:0}.swipeGal .info h5{margin:5px 0 0 20px}
