@@ -109,6 +109,10 @@
 						.mouseover(function(){ changeImage(domObj, infoContainer, img); });
 				
 					hoverContainer.append(elm);
+					
+					// Preload Image
+					var i = new Image();
+					i.src = img.image.replace('_m', '');
 				});
 			}).trigger('resize');
 			
