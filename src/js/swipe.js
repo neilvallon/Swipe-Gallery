@@ -99,12 +99,15 @@
 				hoverContainer.html('');
 				
 				// Get function to map image indexes to pixle values
-				distribution = distributeimages(imgList.length, domObj.width());
+				distribution = distributeimages(
+					imgList.length, Math.floor(domObj.width())
+				);
 				
-				$(imgList).each(function(i, img){
+				$(imgList).each(function(j, img){
 					// add rollover element for image with a width set to that calculated in distributeimages()
 					var elm = $("<span class='rollover'></span>")
-						.css('width', distribution(i+1))
+						.css('width', distribution(j+1))
+						.css('height', domObj.height())
 						.click(function(){ window.open(img.url, '_blank'); })
 						.mouseover(function(){ changeImage(domObj, infoContainer, img); });
 				
@@ -125,7 +128,7 @@
 		return this.each(function(i, obj){
 			var feedid, url;
 			feedid = $(obj).data('feed-id');
-			url = 'http://ycpi.api.flickr.com/services/feeds/groups_pool.gne?id='+feedid+'&jsoncallback=?';
+			url = 'https://api.flickr.com/services/feeds/groups_pool.gne?id='+feedid+'&jsoncallback=?';
 			
 			$.getJSON(url, {format: "json"})
 				.done(function(data){

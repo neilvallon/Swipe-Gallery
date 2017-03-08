@@ -8,7 +8,6 @@
 }
 .swipeGal .rollover {
   display: inline-block;
-  height: 100%;
   opacity: 0;
 }
 .swipeGal .info {
